@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "515721143660",
+    "project_id": "sweet-a",
+    "storage_bucket": "sweet-a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:515721143660:android:cf0e8b027a9d0d3d00bf49",
+        "android_client_info": {
+          "package_name": "com.example.sweet_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB25iDO_U6HEUdMit3zBt2HdqjSKG2Y_4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

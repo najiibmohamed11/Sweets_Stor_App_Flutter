@@ -26,7 +26,7 @@ class sweetcard extends StatelessWidget {
             child: Container(
               width: 100.0,
               height: 100.0,
-              child: Image.asset(imagepath!),
+              child: Image.network(imagepath!),
             ),
           ),
           Text(
