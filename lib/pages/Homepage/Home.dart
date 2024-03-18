@@ -3,30 +3,21 @@ import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sweet_app/navpar/navpar.dart';
 import 'package:sweet_app/pages/Homepage/bigcard.dart';
 import 'package:sweet_app/pages/Homepage/filtercard.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
-    );
-  }
-}
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+  static String id = "Home";
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   String selectedSweet = "dunts";
   // String colectionsweet = "dunts";
 
@@ -40,7 +31,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: NavPar(),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.red,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0), // Adjust radius here
+        ),
         onPressed: () {},
         child: Icon(Icons.shopping_cart_outlined),
       ),
@@ -64,7 +61,11 @@ class _HomeState extends State<Home> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.menu_outlined),
+                  IconButton(
+                      icon: Icon(Icons.menu_outlined),
+                      onPressed: () {
+                        _scaffoldKey.currentState?.openDrawer();
+                      }),
                   CircleAvatar(
                     child: Icon(Icons.person),
                   )
@@ -138,71 +139,48 @@ class _HomeState extends State<Home> {
               Expanded(
                 child: ListView(
                   children: [
-                    Wrap(
-                      spacing: 10.0,
-                      runSpacing: 10,
-                      children: [
-                        StreamBuilder<QuerySnapshot>(
-                          stream: FirebaseFirestore.instance
-                              .collection(selectedSweet)
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return CircularProgressIndicator(); // Loading indicator while waiting for data
-                            }
-                            if (snapshot.hasError) {
-                              return Text('Error: ${snapshot.error}');
-                            }
-                            if (!snapshot.hasData ||
-                                snapshot.data!.docs.isEmpty) {
-                              return Text(
-                                  'No Data'); // Placeholder for empty data
-                            }
-                            // If we reach here, we have data
-                            List<Widget> sweetCards = [];
-                            for (var cardData in snapshot.data!.docs.reversed) {
-                              // Assuming "name" is the correct field name in Firestore
-                              String name = cardData[
-                                  "name"]; // Adjust field name if necessary
-                              int price = cardData["price"];
-                              String imagepath = cardData["imagepath"];
-                              // Add a new sweetcard widget to the list
-                              sweetCards.add(
-                                sweetcard(
-                                  imagepath: imagepath,
-                                  name: name, // Use retrieved name
-                                  description:
-                                      "sugar,flour,butter,\nstrawberry jam,\npink glaze",
-                                  price: price.toDouble(),
-                                ),
-                              );
-                            }
-                            // Return the list of sweetcard widgets wrapped in a Column
-                            return Column(
-                              children: sweetCards,
-                            );
-                          },
-                        ),
-                        // sweetcard(
-                        //     imagepath: "images/creamy_nonsense.webp",
-                        //     name: "White Donut",
-                        //     price: 4.0,
-                        //     description: "sugar,flour,butter,white glaze"),
-                        // sweetcard(
-                        //     imagepath: "images/chocolate_dream.webp",
-                        //     name: "Choco Donut",
-                        //     price: 5.0,
-                        //     description:
-                        //         "sugar,flour,butter,chocolate topping"),
-                        // sweetcard(
-                        //   imagepath: "images/strawberry_blast.webp",
-                        //   name: "Pink Donutes",
-                        //   description:
-                        //       "sugar,flour,butter, \nstrawberry jam,\npink glaze",
-                        //   price: 5.0,
-                        // ),
-                      ],
+                    StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection(selectedSweet)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator(); // Loading indicator while waiting for data
+                        }
+                        if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        }
+                        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                          return Text('No Data'); // Placeholder for empty data
+                        }
+                        // If we reach here, we have data
+                        List<Widget> sweetCards = [];
+                        for (var cardData in snapshot.data!.docs.reversed) {
+                          // Assuming "name" is the correct field name in Firestore
+                          String name = cardData[
+                              "name"]; // Adjust field name if necessary
+                          int price = cardData["price"]
+                              .toInt(); // Make sure this is an int
+                          String imagepath = cardData["imagepath"];
+                          // Add a new sweetcard widget to the list
+                          sweetCards.add(
+                            sweetcard(
+                              imagepath: imagepath,
+                              name: name, // Use retrieved name
+                              description:
+                                  "sugar,flour,butter,\nstrawberry jam,\npink glaze",
+                              price: price,
+                            ),
+                          );
+                        }
+                        // Return the list of sweetcard widgets wrapped in a Column
+                        return Wrap(
+                          spacing: 10.0,
+                          runSpacing: 10,
+                          children: sweetCards,
+                        );
+                      },
                     )
                   ],
                 ),

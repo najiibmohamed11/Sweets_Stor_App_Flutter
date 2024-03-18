@@ -6,7 +6,7 @@ class sweetcard extends StatelessWidget {
   String? imagepath;
   String? name;
   String? description;
-  double? price;
+  int? price;
 
   @override
   Widget build(BuildContext context) {
