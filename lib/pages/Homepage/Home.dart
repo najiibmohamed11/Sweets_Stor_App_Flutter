@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:sweet_app/navpar/navpar.dart';
 import 'package:sweet_app/pages/Homepage/bigcard.dart';
 import 'package:sweet_app/pages/Homepage/filtercard.dart';
+import 'package:sweet_app/pages/Homepage/product%20details/details.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -26,6 +27,10 @@ class _HomeState extends State<Home> {
       selectedSweet = sweet;
       // colectionsweet = sweet;
     });
+  }
+
+  void Detailscall() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Details()));
   }
 
   @override
@@ -171,6 +176,7 @@ class _HomeState extends State<Home> {
                               description:
                                   "sugar,flour,butter,\nstrawberry jam,\npink glaze",
                               price: price,
+                              ontaped: Detailscall,
                             ),
                           );
                         }
