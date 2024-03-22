@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sweet_app/pages/Homepage/cart/cart%20model/cartmodel.dart';
+import 'package:sweet_app/pages/Homepage/cart/components/quantitycontroler.dart';
 
 class Details extends StatefulWidget {
   const Details(
@@ -141,21 +144,17 @@ class _DetailsState extends State<Details> {
                         ),
                       ),
                       Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            howmuch--;
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Color(0xffCED6E8),
-                              borderRadius: BorderRadius.circular(15.0)),
-                          width: 50,
-                          height: 50,
-                          child: Center(child: Icon(Icons.remove)),
-                        ),
+                      quantitycontroler(
+                        icon: Icon(Icons.remove),
+                        onTap: howmuch <= 1
+                            ? null
+                            : () {
+                                setState(() {
+                                  howmuch--;
+                                });
+                              },
                       ),
+
                       SizedBox(
                         width: 15,
                       ),
@@ -169,37 +168,46 @@ class _DetailsState extends State<Details> {
                       SizedBox(
                         width: 15,
                       ),
-                      GestureDetector(
+                      // GestureDetector(
+
+                      //   child:
+                      quantitycontroler(
+                        icon: Icon(Icons.add),
                         onTap: () {
                           setState(() {
                             howmuch++;
                           });
                         },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Color(0xffC3CBF3),
-                              borderRadius: BorderRadius.circular(15.0)),
-                          width: 50,
-                          height: 50,
-                          child: Icon(Icons.add),
-                        ),
-                      )
+                      ),
+                      // )
                     ],
                   ),
                   SizedBox(
                     height: 15.0,
                   ),
-                  Container(
-                    width: double.infinity,
-                    height: 50.0,
-                    decoration: BoxDecoration(
-                        color: Color(0xff445BEF),
-                        borderRadius: BorderRadius.circular(15.0)),
-                    child: Center(
-                        child: Text(
-                      "add to bag",
-                      style: TextStyle(fontSize: 20.0, color: Colors.white),
-                    )),
+                  Consumer<cartopration>(
+                    builder: (context, value, child) {
+                      return GestureDetector(
+                        onTap: () {
+                          value.addtocart(
+                              widget.name!, widget.imagepath!, widget.price!,
+                              quantity: howmuch);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                              color: Color(0xff445BEF),
+                              borderRadius: BorderRadius.circular(15.0)),
+                          child: Center(
+                              child: Text(
+                            "add to bag",
+                            style:
+                                TextStyle(fontSize: 20.0, color: Colors.white),
+                          )),
+                        ),
+                      );
+                    },
                   )
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sweet_app/pages/Homepage/Home.dart';
+import 'package:sweet_app/pages/Homepage/cart/cart.dart';
 import 'package:sweet_app/pages/Homepage/upload/uploadscreen.dart';
 
 class NavPar extends StatelessWidget {
@@ -38,7 +39,9 @@ class NavPar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.shopping_cart_outlined),
             title: Text("cart"),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Cart.id);
+            },
           ),
           SizedBox(
             height: 20.0,

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:sweet_app/navpar/navpar.dart';
 import 'package:sweet_app/pages/Homepage/bigcard.dart';
 import 'package:sweet_app/pages/Homepage/cart/cart%20model/cartmodel.dart';
+import 'package:sweet_app/pages/Homepage/cart/cart.dart';
 import 'package:sweet_app/pages/Homepage/filtercard.dart';
 import 'package:sweet_app/pages/Homepage/product%20details/details.dart';
 
@@ -41,7 +42,14 @@ class _HomeState extends State<Home> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Adjust radius here
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Cart(),
+            ),
+          );
+        },
         child: Icon(Icons.shopping_cart_outlined),
       ),
       body: SafeArea(

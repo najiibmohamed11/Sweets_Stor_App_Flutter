@@ -9,7 +9,7 @@ class cartopration extends ChangeNotifier {
       "price": price,
       "quantity": quantity
     });
-    print(cartinfo);
+    notifyListeners();
   }
 
   void deledefromcart(int index) {
