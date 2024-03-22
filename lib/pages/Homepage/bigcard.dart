@@ -2,17 +2,25 @@ import 'package:flutter/material.dart';
 
 class sweetcard extends StatelessWidget {
   sweetcard(
-      {super.key, this.imagepath, this.description, this.name, this.price,this.ontaped});
+      {super.key,
+      this.imagepath,
+      this.description,
+      this.name,
+      this.price,
+      this.ontaped,
+      this.carttap
+      });
   String? imagepath;
   String? name;
   String? description;
   int? price;
   void Function()? ontaped;
+  void Function()? carttap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:ontaped ,
+      onTap: ontaped,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 15.0),
         width: 180,
@@ -35,7 +43,9 @@ class sweetcard extends StatelessWidget {
             Text(
               name!,
               style: TextStyle(
-                  letterSpacing: 2.0, fontSize: 15, fontWeight: FontWeight.bold),
+                  letterSpacing: 2.0,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold),
             ),
             Text(description!),
             Row(
@@ -45,10 +55,13 @@ class sweetcard extends StatelessWidget {
                   price!.toString(),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                CircleAvatar(
-                  radius: 25.0,
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.shopping_cart_outlined),
+                GestureDetector(
+                  onTap:carttap,
+                  child: CircleAvatar(
+                    radius: 25.0,
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.shopping_cart_outlined),
+                  ),
                 )
               ],
             )

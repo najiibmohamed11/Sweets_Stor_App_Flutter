@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
 
 class Details extends StatefulWidget {
-  const Details({super.key});
+  const Details(
+      {super.key,
+      this.imagepath,
+      this.caleri,
+      this.components,
+      this.description,
+      this.price,
+      this.name});
+  final String? imagepath;
+  final String? name;
+  final String? components;
+  final int? caleri;
+  final String? description;
+  final int? price;
 
   @override
   State<Details> createState() => _DetailsState();
 }
 
 class _DetailsState extends State<Details> {
+  int howmuch = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF6F6FB),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -40,7 +55,11 @@ class _DetailsState extends State<Details> {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.arrow_back_ios),
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(Icons.arrow_back_ios)),
                             Spacer(),
                             Icon(Icons.favorite_border)
                           ],
@@ -48,7 +67,7 @@ class _DetailsState extends State<Details> {
                         Container(
                           width: 300,
                           height: 300,
-                          child: Image.asset("images/strawberry_blast.webp"),
+                          child: Image.network(widget.imagepath!),
                         )
                       ],
                     ),
@@ -62,12 +81,12 @@ class _DetailsState extends State<Details> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Pink Donuts",
+                    widget.name!,
                     style:
                         TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "Sugar,flour,butter,strowbery jam,pink glazo",
+                    widget.components!,
                     style: TextStyle(letterSpacing: 2.0),
                   ),
                   SizedBox(
@@ -84,7 +103,7 @@ class _DetailsState extends State<Details> {
                         ),
                       ),
                       Text(
-                        "🔥 560 cal",
+                        "🔥 ${widget.caleri} cal",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18.0,
@@ -103,7 +122,7 @@ class _DetailsState extends State<Details> {
                   Container(
                     width: 350.0,
                     child: Text(
-                      "the sweet and juicy combo of pink glaze and strawberry jam. introduce with the pink Donut as soon as possible",
+                      widget.description!,
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.w500),
                     ),
@@ -115,34 +134,33 @@ class _DetailsState extends State<Details> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        "\$5.0",
+                        "\$ ${widget.price}",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25.0,
                         ),
                       ),
                       Spacer(),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffCED6E8),
-                            borderRadius: BorderRadius.circular(15.0)),
-                        width: 50,
-                        height: 50,
-                        child: Center(
-                          child: Text(
-                            "➖",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
-                            ),
-                          ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            howmuch--;
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Color(0xffCED6E8),
+                              borderRadius: BorderRadius.circular(15.0)),
+                          width: 50,
+                          height: 50,
+                          child: Center(child: Icon(Icons.remove)),
                         ),
                       ),
                       SizedBox(
                         width: 15,
                       ),
                       Text(
-                        "1",
+                        howmuch.toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0,
@@ -151,13 +169,20 @@ class _DetailsState extends State<Details> {
                       SizedBox(
                         width: 15,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffC3CBF3),
-                            borderRadius: BorderRadius.circular(15.0)),
-                        width: 50,
-                        height: 50,
-                        child: Icon(Icons.add),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            howmuch++;
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Color(0xffC3CBF3),
+                              borderRadius: BorderRadius.circular(15.0)),
+                          width: 50,
+                          height: 50,
+                          child: Icon(Icons.add),
+                        ),
                       )
                     ],
                   ),

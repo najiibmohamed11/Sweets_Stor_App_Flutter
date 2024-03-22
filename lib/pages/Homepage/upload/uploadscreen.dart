@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sweet_app/navpar/navpar.dart';
+import 'package:sweet_app/pages/Homepage/upload/textfield.dart';
 
 class Uploadscreen extends StatefulWidget {
   const Uploadscreen({super.key});
@@ -20,7 +21,10 @@ class _UploadscreenState extends State<Uploadscreen> {
   String? selectedCategory; // Variable to hold the selected category
   File? imageFile;
   int? price;
+  int? calories;
   String? sweetname;
+  String? description;
+  String? components;
 
   final List<String> categories = [
     'chocolate',
@@ -53,6 +57,9 @@ class _UploadscreenState extends State<Uploadscreen> {
         'name': sweetname,
         'price': price,
         'imagepath': imageUrl,
+        'calors': calories,
+        'description': description,
+        'components': components,
       });
 
       print("Upload successful");
@@ -72,6 +79,31 @@ class _UploadscreenState extends State<Uploadscreen> {
       });
     } catch (e) {
       print("Failed to pick an image: $e");
+    }
+  }
+
+  void sweetnamegeter(String inputText, String hintText) {
+    if (hintText == "sweet name") {
+      setState(() {
+        sweetname = inputText;
+      });
+    } else if (hintText == "Price") {
+      setState(() {
+        price = int.tryParse(inputText);
+      });
+    } else if (hintText == "description") {
+      setState(() {
+        description = inputText;
+      });
+    } else if (hintText == "calories") {
+      setState(() {
+        calories = int.tryParse(inputText);
+      });
+    } else if (hintText == "components") {
+      setState(() {
+        components = inputText;
+        print("you write some thing on price $components");
+      });
     }
   }
 
@@ -126,33 +158,23 @@ class _UploadscreenState extends State<Uploadscreen> {
                   ),
                 ),
                 SizedBox(height: 80.0),
-                TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      sweetname = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Sweet name",
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: InputBorder.none,
-                  ),
+                Custometextfield(
+                  hintText: "sweet name",
+                  onChanged: sweetnamegeter,
                 ),
                 SizedBox(height: 20.0),
-                TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      price = int.tryParse(value);
-                    });
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Price",
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: InputBorder.none,
-                  ),
+                Custometextfield(
+                  hintText: "components",
+                  onChanged: sweetnamegeter,
                 ),
+                SizedBox(height: 20.0),
+                Custometextfield(hintText: "Price", onChanged: sweetnamegeter),
+                SizedBox(height: 20.0),
+                Custometextfield(
+                    hintText: "calories", onChanged: sweetnamegeter),
+                SizedBox(height: 20.0),
+                Custometextfield(
+                    hintText: "description", onChanged: sweetnamegeter),
                 SizedBox(height: 20.0),
                 DropdownButtonFormField<String>(
                   value: selectedCategory,
