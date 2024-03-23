@@ -2,12 +2,29 @@ import 'package:flutter/material.dart';
 
 class cartopration extends ChangeNotifier {
   List<Map<String, dynamic>> cartinfo = [];
-  void addtocart(String name, String imagepath, int price, {int quantity = 1}) {
+  List<Map<String, dynamic>> favorateinfo = [];
+  void addtofavorate(
+      String name, String imagepath, int price, String ingredients) {
+    favorateinfo.add({
+      "name": name,
+      "imagepath": imagepath,
+      "price": price,
+      "ingredients": ingredients,
+    });
+    print(favorateinfo);
+  }
+
+  void addtocart(
+    String name,
+    String imagepath,
+    int price, {
+    int quantity = 1,
+  }) {
     cartinfo.add({
       "name": name,
       "imagepath": imagepath,
       "price": price,
-      "quantity": quantity
+      "quantity": quantity,
     });
     notifyListeners();
     print(total());
