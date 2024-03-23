@@ -183,7 +183,7 @@ class _DetailsState extends State<Details> {
                     ],
                   ),
                   SizedBox(
-                    height: 15.0,
+                    height: 35.0,
                   ),
                   Consumer<cartopration>(
                     builder: (context, value, child) {

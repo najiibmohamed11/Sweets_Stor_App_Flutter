@@ -20,57 +20,58 @@ class _CartState extends State<Cart> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: NavPar(),
-      body: SafeArea(
-          child: Column(
-        children: [
-          Container(
-              width: double.infinity,
-              height: 500,
-              padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadiusDirectional.vertical(
-                    bottom: Radius.circular(200.0)),
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFFF9CBDF), // #F9CBDF
-                    Color.fromARGB(255, 216, 217, 225), // #EBE4F5
-                  ],
-                  stops: [0.1, 0.4],
-                ),
-              ),
+    return Consumer<cartopration>(
+      builder: (context, value, child) {
+        return Scaffold(
+          key: _scaffoldKey,
+          drawer: NavPar(),
+          body: SafeArea(
               child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                  width: double.infinity,
+                  height: 500,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadiusDirectional.vertical(
+                        bottom: Radius.circular(200.0)),
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFFF9CBDF), // #F9CBDF
+                        Color.fromARGB(255, 216, 217, 225), // #EBE4F5
+                      ],
+                      stops: [0.1, 0.4],
+                    ),
+                  ),
+                  child: Column(
                     children: [
-                      IconButton(
-                          icon: Icon(Icons.menu_outlined),
-                          onPressed: () {
-                            _scaffoldKey.currentState?.openDrawer();
-                          }),
-                      CircleAvatar(
-                        child: Icon(Icons.person),
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 10.0,
-                    ),
-                    child: Text(
-                      "My Cart",
-                      style: TextStyle(
-                          fontSize: 24.0, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Consumer<cartopration>(
-                    builder: (context, value, child) {
-                      return value.cartinfo.length == 0
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                              icon: Icon(Icons.menu_outlined),
+                              onPressed: () {
+                                _scaffoldKey.currentState?.openDrawer();
+                              }),
+                          CircleAvatar(
+                            child: Icon(Icons.person),
+                          )
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 10.0,
+                        ),
+                        child: Text(
+                          "My Cart",
+                          style: TextStyle(
+                              fontSize: 24.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      value.cartinfo.length == 0
                           ? Text("no data in the cart")
                           : Expanded(
                               child: ListView.builder(
@@ -106,7 +107,9 @@ class _CartState extends State<Cart> {
                                           children: [
                                             quantitycontroler(
                                               icon: Icon(Icons.remove),
-                                              onTap: howmuch <= 1
+                                              onTap: value.cartinfo[index]
+                                                          ["quantity"] <=
+                                                      1
                                                   ? null
                                                   : () {
                                                       setState(() {
@@ -126,7 +129,7 @@ class _CartState extends State<Cart> {
                                             ),
                                             SizedBox(width: 6.0),
                                             quantitycontroler(
-                                              icon: Icon(Icons.remove),
+                                              icon: Icon(Icons.add),
                                               onTap: () {
                                                 setState(() {
                                                   value.cartinfo[index]
@@ -147,14 +150,120 @@ class _CartState extends State<Cart> {
                                   );
                                 },
                               ),
-                            );
-                    },
-                  )
-                ],
-                crossAxisAlignment: CrossAxisAlignment.start,
-              )),
-        ],
-      )),
+                            ),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                  )),
+              Container(
+                margin: EdgeInsets.only(top: 35.0),
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "SubTotal",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              letterSpacing: 1.0,
+                              color: Colors.grey[600]),
+                        ),
+                        Text(
+                          "\$${value.total()}",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              letterSpacing: 1.0,
+                              color: Colors.grey[600]),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 25.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Discount",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              letterSpacing: 1.0,
+                              color: Colors.grey[600]),
+                        ),
+                        Text(
+                          "-0%",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              letterSpacing: 1.0,
+                              color: Colors.grey[600]),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Text(
+                      "------------------------------------------------------------",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          letterSpacing: 0.5,
+                          color: Colors.grey[600]),
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Total:",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                              letterSpacing: 1.0,
+                              color: Colors.grey[800]),
+                        ),
+                        Text(
+                          "\$${value.total()}",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                              letterSpacing: 1.0,
+                              color: Colors.grey[800]),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 50.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        width: double.infinity,
+                        height: 50.0,
+                        decoration: BoxDecoration(
+                            color: Color(0xff445BEF),
+                            borderRadius: BorderRadius.circular(15.0)),
+                        child: Center(
+                            child: Text(
+                          "add to bag",
+                          style: TextStyle(fontSize: 20.0, color: Colors.white),
+                        )),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )),
+        );
+      },
     );
   }
 }

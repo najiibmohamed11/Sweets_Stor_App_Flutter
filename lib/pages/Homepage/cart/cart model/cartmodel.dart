@@ -10,10 +10,21 @@ class cartopration extends ChangeNotifier {
       "quantity": quantity
     });
     notifyListeners();
+    print(total());
   }
 
   void deledefromcart(int index) {
     cartinfo.removeAt(index);
     notifyListeners();
+  }
+
+  int total() {
+    int accumulator = 0; // Initialize accumulator with 0
+    for (var cart in cartinfo) {
+      accumulator += (cart["price"] as int) *
+          (cart["quantity"] as int); // Explicitly cast to int
+    }
+
+    return accumulator;
   }
 }
