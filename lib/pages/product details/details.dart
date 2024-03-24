@@ -26,7 +26,6 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
-  bool isfavorate = false;
   int howmuch = 1;
   @override
   Widget build(BuildContext context) {
@@ -68,11 +67,19 @@ class _DetailsState extends State<Details> {
                                   },
                                   icon: Icon(Icons.arrow_back_ios)),
                               Spacer(),
-                              isfavorate
+                              value.favorateStatus(
+                                      widget.name!,
+                                      widget.imagepath!,
+                                      widget.price!,
+                                      widget.components!)
                                   ? IconButton(
                                       onPressed: () {
                                         setState(() {
-                                          isfavorate = false;
+                                          value.deldefavorate(
+                                              widget.name!,
+                                              widget.imagepath!,
+                                              widget.price!,
+                                              widget.components!);
                                         });
                                       },
                                       icon: Icon(
@@ -82,7 +89,6 @@ class _DetailsState extends State<Details> {
                                   : IconButton(
                                       onPressed: () {
                                         setState(() {
-                                          isfavorate = true;
                                           value.addtofavorat(
                                               widget.name!,
                                               widget.imagepath!,

@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:sweet_app/pages/favorate/favorate.dart';
 
 class cartopration extends ChangeNotifier {
   List<Map<String, dynamic>> cartinfo = [];
   List<Map<String, dynamic>> addtofavorate = [];
   void addtocart(String name, String imagepath, int price, {int quantity = 1}) {
-    cartinfo.add({
-      "name": name,
-      "imagepath": imagepath,
-      "price": price,
-      "quantity": quantity
-    });
+    bool checkdublicate = false;
+    for (var cart in cartinfo) {
+      if (cart["name"] == name &&
+          cart["imagepath"] == imagepath &&
+          cart["price"] == price) {
+        cart["quantity"]++;
+        checkdublicate = true;
+        break;
+      }
+    }
+    if (!checkdublicate) {
+      cartinfo.add({
+        "name": name,
+        "imagepath": imagepath,
+        "price": price,
+        "quantity": quantity
+      });
+    }
+
     notifyListeners();
   }
 
@@ -25,8 +39,51 @@ class cartopration extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deldefavorate(
+      String name, String imagepath, int price, String ingridents) {
+    int indexToRemove = -1;
+    for (int i = 0; i < addtofavorate.length; i++) {
+      if (addtofavorate[i]["name"] == name &&
+          addtofavorate[i]["imagepath"] == imagepath &&
+          addtofavorate[i]["price"] == price &&
+          addtofavorate[i]["ingridents"] == ingridents) {
+        indexToRemove = i;
+        break;
+      }
+    }
+
+    if (indexToRemove != -1) {
+      addtofavorate.removeAt(indexToRemove);
+      print(addtofavorate);
+      notifyListeners();
+    }
+  }
+
+  bool favorateStatus(
+      String name, String imagepath, int price, String ingridents) {
+    for (var favorate in addtofavorate) {
+      if (favorate["name"] == name &&
+          favorate["imagepath"] == imagepath &&
+          favorate["price"] == price &&
+          favorate["ingridents"] == ingridents) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   void deledefromcart(int index) {
     cartinfo.removeAt(index);
     notifyListeners();
+  }
+
+  int total() {
+    int accumulator = 0; // Initialize accumulator with 0
+    for (var cart in cartinfo) {
+      accumulator += (cart["price"] as int) *
+          (cart["quantity"] as int); // Explicitly cast to int
+    }
+
+    return accumulator;
   }
 }
