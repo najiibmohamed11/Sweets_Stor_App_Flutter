@@ -5,11 +5,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sweet_app/navpar/navpar.dart';
-import 'package:sweet_app/pages/Homepage/bigcard.dart';
-import 'package:sweet_app/pages/Homepage/cart/cart%20model/cartmodel.dart';
-import 'package:sweet_app/pages/Homepage/cart/cart.dart';
-import 'package:sweet_app/pages/Homepage/filtercard.dart';
-import 'package:sweet_app/pages/Homepage/product%20details/details.dart';
+import 'package:sweet_app/pages/Home/bigcard.dart';
+import 'package:sweet_app/pages/cart/cart%20model/cartmodel.dart';
+import 'package:sweet_app/pages/cart/cart.dart';
+import 'package:sweet_app/pages/Home/filtercard.dart';
+import 'package:sweet_app/pages/product%20details/details.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

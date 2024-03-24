@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sweet_app/pages/Homepage/Home.dart';
-import 'package:sweet_app/pages/Homepage/cart/cart.dart';
-import 'package:sweet_app/pages/Homepage/upload/uploadscreen.dart';
+import 'package:sweet_app/pages/Home/Home.dart';
+import 'package:sweet_app/pages/cart/cart.dart';
+import 'package:sweet_app/pages/favorate/favorate.dart';
+import 'package:sweet_app/pages/upload/uploadscreen.dart';
 
 class NavPar extends StatelessWidget {
   const NavPar({super.key});
@@ -31,7 +32,9 @@ class NavPar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.favorite_sharp),
             title: Text("favorate"),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Favorate.id);
+            },
           ),
           SizedBox(
             height: 20.0,
