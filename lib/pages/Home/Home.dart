@@ -1,14 +1,13 @@
-import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sweet_app/navpar/navpar.dart';
-import 'package:sweet_app/pages/Home/bigcard.dart';
+import 'package:sweet_app/pages/components/bigcard.dart';
 import 'package:sweet_app/pages/cart/cart%20model/cartmodel.dart';
 import 'package:sweet_app/pages/cart/cart.dart';
-import 'package:sweet_app/pages/Home/filtercard.dart';
+import 'package:sweet_app/pages/components/filtercard.dart';
 import 'package:sweet_app/pages/product%20details/details.dart';
 
 class Home extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:sweet_app/pages/Home/bigcard.dart';
+import 'package:sweet_app/pages/components/bigcard.dart';
 import 'package:sweet_app/pages/cart/cart%20model/cartmodel.dart';
 
 class Favorate extends StatefulWidget {

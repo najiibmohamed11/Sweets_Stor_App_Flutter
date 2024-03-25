@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sweet_app/pages/Login/login.dart';
+import 'package:sweet_app/pages/components/athanticationbuttons.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -37,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
-                  'welcome to flutter sweets',
+                  'Welcome to Flutter Sweets',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.notoSerif(
                       fontSize: 35.0, fontWeight: FontWeight.w500),
@@ -57,57 +59,34 @@ class WelcomeScreen extends StatelessWidget {
               SizedBox(
                 height: 45.0,
               ),
-              athenticationbuttons(
-                name: "  Logign",
-                color: Colors.black,
-                onTap: () {},
-                textcolor: Colors.white,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: athenticationbuttons(
+                  name: "  Logign",
+                  color: Colors.black,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Login()),
+                    );
+                  },
+                  textcolor: Colors.white,
+                ),
               ),
               SizedBox(
                 height: 15.0,
               ),
-              athenticationbuttons(
-                name: "  Register",
-                color: Color(0xffAFAFAF),
-                onTap: () {},
-                textcolor: Colors.black,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: athenticationbuttons(
+                  name: "  Register",
+                  color: Color(0xffAFAFAF),
+                  onTap: () {},
+                  textcolor: Colors.black,
+                ),
               )
             ],
           )),
     ));
-  }
-}
-
-class athenticationbuttons extends StatelessWidget {
-  athenticationbuttons(
-      {super.key, this.name, this.color, this.onTap, this.textcolor});
-  String? name;
-  Color? color;
-  Color? textcolor;
-  void Function()? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 25.0),
-        width: double.infinity,
-        height: 80.0,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12), color: color),
-        child: Center(
-          child: Text(
-            name!,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 25.0,
-              fontWeight: FontWeight.w500,
-              color: textcolor, // Change the color here
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
