@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sweet_app/auth/firebaseAuth.dart';
 import 'package:sweet_app/pages/Home/Home.dart';
 import 'package:sweet_app/pages/cart/cart.dart';
 import 'package:sweet_app/pages/favorate/favorate.dart';
 import 'package:sweet_app/pages/upload/uploadscreen.dart';
+import 'package:sweet_app/pages/welcomescreen/welcome.dart';
 
 class NavPar extends StatelessWidget {
-  const NavPar({super.key});
+  NavPar({super.key});
+  final User? currentUser = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +18,8 @@ class NavPar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-              accountName: Text("abdinajib"),
-              accountEmail: Text("abdinaji@gmail.com"),
+              accountName: Text(currentUser?.displayName ?? 'Guest'),
+              accountEmail: Text(currentUser?.email ?? 'No Email'),
               currentAccountPicture: CircleAvatar(
                 child: Icon(Icons.person),
               )),
@@ -60,7 +64,10 @@ class NavPar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text("Exit"),
-            onTap: () {},
+            onTap: () async {
+              FirebaseAuthantication().signOut();
+              Navigator.of(context).pushReplacementNamed(WelcomeScreen.id);
+            },
           )
         ],
       ),
