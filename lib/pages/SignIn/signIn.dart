@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sweet_app/auth/firebaseAuth.dart';
 import 'package:sweet_app/pages/Home/Home.dart';
-import 'package:sweet_app/pages/SignIn/signIn.dart';
+import 'package:sweet_app/pages/Login/login.dart';
 import 'package:sweet_app/pages/components/athanticationbuttons.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   String? email;
+  String? name;
   String? password;
   @override
   Widget build(BuildContext context) {
@@ -51,26 +52,52 @@ class _LoginState extends State<Login> {
                   height: 45.0,
                 ),
                 Text(
-                  'Let\'s sign in',
+                  'Register account',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.notoSerif(
                     fontSize: 35.0,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
+
                 SizedBox(
-                  height: 20.0,
+                  height: 30.0,
                 ),
-                Text(
-                  'welcome back \nyou\'ve been missed!',
-                  textAlign: TextAlign.start,
-                  style: GoogleFonts.montserrat(
-                    letterSpacing: 1.5,
-                    fontSize: 21.0,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Name",
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            name = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: "Enter Your Name",
+                          hintStyle: TextStyle(color: Colors.grey),
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 15.0,
+                            horizontal: 10.0,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
-                  height: 50.0,
+                  height: 20.0,
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -186,23 +213,23 @@ class _LoginState extends State<Login> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account?"),
+                    Text(" have an account?"),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SignUp()),
+                          MaterialPageRoute(builder: (context) => Login()),
                         );
                       },
                       child: Text(
-                        "Register",
+                        "Sig in",
                         style: TextStyle(fontSize: 15.0, color: Colors.black),
                       ),
                     ),
                   ],
                 ),
                 athenticationbuttons(
-                  name: "Login",
+                  name: "register",
                   color: Colors.black,
                   onTap: () async {
                     if (email == null || password == null) {

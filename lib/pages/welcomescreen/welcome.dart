@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sweet_app/pages/Login/login.dart';
+import 'package:sweet_app/pages/SignIn/signIn.dart';
 import 'package:sweet_app/pages/components/athanticationbuttons.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -81,7 +82,12 @@ class WelcomeScreen extends StatelessWidget {
                 child: athenticationbuttons(
                   name: "  Register",
                   color: Color(0xffAFAFAF),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUp()),
+                    );
+                  },
                   textcolor: Colors.black,
                 ),
               )
