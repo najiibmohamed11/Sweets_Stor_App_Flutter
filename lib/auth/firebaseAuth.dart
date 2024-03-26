@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthantication {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   //creat user
   Future<User?> register(String email, String password) async {
     try {
@@ -26,6 +29,29 @@ class FirebaseAuthantication {
   }
 
   Future<void> signOut() async {
-  await FirebaseAuth.instance.signOut();
-}
+    await FirebaseAuth.instance.signOut();
+  }
+
+  Future<String> getCurrentUserRoleByEmail() async {
+    String role = 'user';
+    try {
+      final currentUser = _auth.currentUser;
+      if (currentUser != null && currentUser.email != null) {
+        // Assuming your documents are keyed by email
+        final querySnapshot = await _firestore
+            .collection('users')
+            .where('Email', isEqualTo: currentUser.email)
+            .limit(1)
+            .get();
+        if (querySnapshot.docs.isNotEmpty &&
+            querySnapshot.docs.first.data().containsKey('Role')) {
+          role = querySnapshot.docs.first.data()['Role'];
+        }
+      }
+    } catch (e) {
+      print("Error getting user role: $e");
+    }
+    print("$role this is role of this user ");
+    return role;
+  }
 }

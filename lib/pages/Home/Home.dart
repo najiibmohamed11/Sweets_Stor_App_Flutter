@@ -1,5 +1,5 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +19,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final FirebaseAuth _auth = FirebaseAuth.instance; // Firebase Auth instance
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   String selectedSweet = "dunts";
@@ -83,7 +85,7 @@ class _HomeState extends State<Home> {
               ),
               SizedBox(height: 40.0),
               Text(
-                "HI, Anna👋",
+                "HI, ${_auth.currentUser?.displayName ?? "user"}👋",
                 style: TextStyle(fontSize: 45.0, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 15.0),

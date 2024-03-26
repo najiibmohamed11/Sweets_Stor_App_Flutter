@@ -10,6 +10,7 @@ import 'package:sweet_app/pages/welcomescreen/welcome.dart';
 class NavPar extends StatelessWidget {
   NavPar({super.key});
   final User? currentUser = FirebaseAuth.instance.currentUser;
+  final FirebaseAuthantication authanticateTheUser = FirebaseAuthantication();
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +19,12 @@ class NavPar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-              accountName: Text(currentUser?.displayName ?? 'Guest'),
-              accountEmail: Text(currentUser?.email ?? 'No Email'),
-              currentAccountPicture: CircleAvatar(
-                child: Icon(Icons.person),
-              )),
+            accountName: Text(currentUser?.displayName ?? 'Guest'),
+            accountEmail: Text(currentUser?.email ?? 'No Email'),
+            currentAccountPicture: CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+          ),
           ListTile(
             leading: Icon(Icons.home_filled),
             title: Text("Home"),
@@ -30,9 +32,7 @@ class NavPar extends StatelessWidget {
               Navigator.pushNamed(context, Home.id);
             },
           ),
-          SizedBox(
-            height: 20.0,
-          ),
+          SizedBox(height: 20.0),
           ListTile(
             leading: Icon(Icons.favorite_sharp),
             title: Text("favorate"),
@@ -40,9 +40,7 @@ class NavPar extends StatelessWidget {
               Navigator.pushNamed(context, Favorate.id);
             },
           ),
-          SizedBox(
-            height: 20.0,
-          ),
+          SizedBox(height: 20.0),
           ListTile(
             leading: Icon(Icons.shopping_cart_outlined),
             title: Text("cart"),
@@ -50,14 +48,28 @@ class NavPar extends StatelessWidget {
               Navigator.pushNamed(context, Cart.id);
             },
           ),
-          SizedBox(
-            height: 20.0,
-          ),
-          ListTile(
-            leading: Icon(Icons.upload_file_outlined),
-            title: Text("add new product"),
-            onTap: () {
-              Navigator.pushNamed(context, Uploadscreen.id);
+          SizedBox(height: 20.0),
+          FutureBuilder<String>(
+            future: authanticateTheUser
+                .getCurrentUserRoleByEmail(), // This should be your method returning Future<String>
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData && snapshot.data == "admin") {
+                  return ListTile(
+                    leading: Icon(Icons.upload_file_outlined),
+                    title: Text("add new product"),
+                    onTap: () {
+                      Navigator.pushNamed(context, Uploadscreen.id);
+                    },
+                  );
+                }
+                return SizedBox
+                    .shrink(); // User is not admin or role couldn't be determined
+              } else {
+                return Center(
+                    child:
+                        CircularProgressIndicator()); // Loading indicator while waiting for future to complete
+              }
             },
           ),
           Divider(),

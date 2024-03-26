@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sweet_app/auth/firebaseAuth.dart';
@@ -17,6 +19,8 @@ class _SignUpState extends State<SignUp> {
   String? email;
   String? name;
   String? password;
+  final _firstore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -232,23 +236,36 @@ class _SignUpState extends State<SignUp> {
                   name: "register",
                   color: Colors.black,
                   onTap: () async {
-                    if (email == null || password == null) {
+                    if (email == null || password == null || name == null) {
                       // Show some error message to the user
-                      print("Email and password must be filled.");
+                      print("Email, password, and name must be filled.");
                       return;
                     }
 
-                    User? signedUser = await FirebaseAuthantication()
-                        .signin(email!, password!);
-                    if (signedUser == null) {
+                    User? createUser = await FirebaseAuthantication()
+                        .register(email!, password!);
+
+                    if (createUser == null) {
                       // Handle the case where the sign in failed
                       print("Sign in failed.");
                       return;
                     }
-                    print(signedUser);
 
-                    // If sign in was successful, navigate to the Home page
-                    Navigator.pushNamed(context, Home.id);
+                    try {
+                      await createUser.updateDisplayName(name);
+                      await _firstore.collection("users").add({
+                        "Email": createUser.email,
+                        "Name": name,
+                        "Role": "user"
+                        // Store the user ID instead of the whole user object
+                      });
+                      print(createUser);
+                      // If sign in was successful, navigate to the Home page
+                      Navigator.pushNamed(context, Home.id);
+                    } catch (e) {
+                      print("Error updating profile: $e");
+                      // Handle error updating profile
+                    }
                   },
                   textcolor: Colors.white,
                 ),
