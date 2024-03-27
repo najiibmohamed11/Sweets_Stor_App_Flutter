@@ -20,6 +20,7 @@ class _SignUpState extends State<SignUp> {
   String? name;
   String? password;
   final _firstore = FirebaseFirestore.instance;
+  FirebaseAuthantication allathantications = FirebaseAuthantication();
 
   @override
   Widget build(BuildContext context) {
@@ -202,6 +203,29 @@ class _SignUpState extends State<SignUp> {
                   children: [
                     authanticationcontainer(
                       authanticationmethodeimage: "images/google.png",
+                      onTap: () async {
+                        UserCredential? usersdata =
+                            await allathantications.signInWithGoogle();
+                        if (usersdata != null && usersdata.user != null) {
+                          try {
+                            await _firstore.collection("users").add({
+                              "Email": usersdata.user!
+                                  .email, // Safe to use ! since we checked for null
+                              "Name": name,
+                              "Role": "user"
+                            });
+                            // If sign in and data addition was successful, navigate to the Home page
+                            Navigator.pushNamed(context, Home.id);
+                          } catch (e) {
+                            print("Error adding user data to Firestore: $e");
+                            // Handle error adding user data to Firestore
+                          }
+                        } else {
+                          print(
+                              "Google sign-in failed or was cancelled by the user.");
+                          // Handle the case where Google sign-in failed or was cancelled
+                        }
+                      },
                     ),
                     SizedBox(
                       width: 20.0,
@@ -242,8 +266,8 @@ class _SignUpState extends State<SignUp> {
                       return;
                     }
 
-                    User? createUser = await FirebaseAuthantication()
-                        .register(email!, password!);
+                    User? createUser =
+                        await allathantications.register(email!, password!);
 
                     if (createUser == null) {
                       // Handle the case where the sign in failed
@@ -281,21 +305,26 @@ class _SignUpState extends State<SignUp> {
 ///facebook and google
 
 class authanticationcontainer extends StatelessWidget {
-  authanticationcontainer({super.key, this.authanticationmethodeimage});
+  authanticationcontainer(
+      {super.key, this.authanticationmethodeimage, this.onTap});
   String? authanticationmethodeimage;
+  void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 60.0,
-      height: 60.0,
-      decoration: BoxDecoration(
-        color: Color.fromARGB(255, 216, 217, 225), // #EBE4F5
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 60.0,
+        height: 60.0,
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 216, 217, 225), // #EBE4F5
 
-        borderRadius: BorderRadius.circular(12.0),
-        border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(12.0),
+          border: Border.all(color: Colors.black),
+        ),
+        child: Image.asset(authanticationmethodeimage!),
       ),
-      child: Image.asset(authanticationmethodeimage!),
     );
   }
 }

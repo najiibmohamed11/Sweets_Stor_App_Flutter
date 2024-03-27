@@ -20,6 +20,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final FirebaseAuth _auth = FirebaseAuth.instance; // Firebase Auth instance
+  final User? currentUser = FirebaseAuth.instance.currentUser;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -79,13 +80,24 @@ class _HomeState extends State<Home> {
                         _scaffoldKey.currentState?.openDrawer();
                       }),
                   CircleAvatar(
-                    child: Icon(Icons.person),
-                  )
+                    backgroundColor: Colors.white,
+                    child: currentUser?.photoURL != null
+                        ? ClipOval(
+                            child: Image.network(
+                              currentUser!.photoURL!,
+                              fit: BoxFit.cover,
+                              width: 90.0,
+                              height: 90.0,
+                            ),
+                          )
+                        : Icon(Icons.person,
+                            size: 40.0, color: Colors.grey[800]),
+                  ),
                 ],
               ),
               SizedBox(height: 40.0),
               Text(
-                "HI, ${_auth.currentUser?.displayName ?? "user"}👋",
+                "HI, ${_auth.currentUser?.displayName!.split(" ").first ?? "user"}👋",
                 style: TextStyle(fontSize: 45.0, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 15.0),

@@ -22,7 +22,17 @@ class NavPar extends StatelessWidget {
             accountName: Text(currentUser?.displayName ?? 'Guest'),
             accountEmail: Text(currentUser?.email ?? 'No Email'),
             currentAccountPicture: CircleAvatar(
-              child: Icon(Icons.person),
+              backgroundColor: Colors.white,
+              child: currentUser?.photoURL != null
+                  ? ClipOval(
+                      child: Image.network(
+                        currentUser!.photoURL!,
+                        fit: BoxFit.cover,
+                        width: 90.0,
+                        height: 90.0,
+                      ),
+                    )
+                  : Icon(Icons.person, size: 40.0, color: Colors.grey[800]),
             ),
           ),
           ListTile(
