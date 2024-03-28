@@ -1,7 +1,13 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -14,12 +20,54 @@ class _ProfileState extends State<Profile> {
   @override
   final User? currentUser = FirebaseAuth.instance.currentUser;
   late TextEditingController _controller;
+  File? imageFile;
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
+
   @override
   void initState() {
     _controller =
         TextEditingController(text: currentUser?.displayName! ?? "jasnkj");
     // TODO: implement initState
     super.initState();
+  }
+
+  //upload the image to the firebase
+  Future<void> uploadimage() async {
+    if (imageFile == null) return;
+
+    try {
+      // Create a unique file name for the image
+      String fileName = "images/${DateTime.now().millisecondsSinceEpoch}.jpg";
+
+      // Upload image to Firebase Storage
+      firebase_storage.TaskSnapshot snapshot =
+          await storage.ref(fileName).putFile(imageFile!);
+
+      // Get the URL of the uploaded image
+      String imageUrl = await snapshot.ref.getDownloadURL();
+      currentUser?.updatePhotoURL(imageUrl);
+      setState(() {
+        currentUser!.reload();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  //pick image fromr any where
+  Future<void> imagepicker(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+
+      final tempImage = File(image.path);
+      setState(() {
+        imageFile = tempImage;
+      });
+    } catch (e) {
+      print("Failed to pick an image: $e");
+    }
   }
 
   Widget build(BuildContext context) {
@@ -66,24 +114,29 @@ class _ProfileState extends State<Profile> {
                           height: 200,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50)),
-                          child: currentUser?.photoURL != null
-                              ? ClipOval(
-                                  child: Image.network(
-                                    currentUser!.photoURL!,
-                                    fit: BoxFit.cover,
-                                    width: 90.0,
-                                    height: 90.0,
-                                  ),
-                                )
-                              : Icon(Icons.person,
-                                  size: 40.0, color: Colors.grey[800]),
+                          child:
+                              currentUser?.photoURL != null && imageFile == null
+                                  ? ClipOval(
+                                      child: Image.network(
+                                        currentUser!.photoURL!,
+                                        fit: BoxFit.cover,
+                                        width: 90.0,
+                                        height: 90.0,
+                                      ),
+                                    )
+                                  : imageFile != null
+                                      ? ClipOval(child: Image.file(imageFile!))
+                                      : Icon(Icons.person,
+                                          size: 40.0, color: Colors.grey[800]),
                         ),
                       ),
                       Positioned(
                         bottom: 0,
                         right: 10,
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await imagepicker(ImageSource.camera);
+                          },
                           icon: Icon(
                             Icons.add_a_photo,
                             color: Colors.black,
@@ -139,6 +192,10 @@ class _ProfileState extends State<Profile> {
                   child: ElevatedButton(
                     onPressed: () async {
                       await currentUser?.updateDisplayName(_controller.text);
+                      await uploadimage();
+                      setState(() {
+                        currentUser!.reload();
+                      });
 
                       // Button action
                     },

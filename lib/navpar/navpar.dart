@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sweet_app/auth/firebaseAuth.dart';
 import 'package:sweet_app/pages/Home/Home.dart';
 import 'package:sweet_app/pages/cart/cart.dart';
 import 'package:sweet_app/pages/favorate/favorate.dart';
+import 'package:sweet_app/pages/settings/settings.dart';
 import 'package:sweet_app/pages/upload/uploadscreen.dart';
 import 'package:sweet_app/pages/welcomescreen/welcome.dart';
 
@@ -20,7 +22,6 @@ class NavPar extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
-              
               decoration: BoxDecoration(
                 color: Color(0xFFF9CBDF),
               ),
@@ -91,6 +92,19 @@ class NavPar extends StatelessWidget {
                       child:
                           CircularProgressIndicator()); // Loading indicator while waiting for future to complete
                 }
+              },
+            ),
+            SizedBox(height: 20.0),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text("settings"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Setting(),
+                  ),
+                );
               },
             ),
             Divider(),
