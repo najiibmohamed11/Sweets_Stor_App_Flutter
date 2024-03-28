@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:sweet_app/navpar/navpar.dart';
 import 'package:sweet_app/pages/components/bigcard.dart';
@@ -9,6 +10,7 @@ import 'package:sweet_app/pages/cart/cart%20model/cartmodel.dart';
 import 'package:sweet_app/pages/cart/cart.dart';
 import 'package:sweet_app/pages/components/filtercard.dart';
 import 'package:sweet_app/pages/product%20details/details.dart';
+import 'package:sweet_app/pages/profile/profile.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -79,19 +81,29 @@ class _HomeState extends State<Home> {
                       onPressed: () {
                         _scaffoldKey.currentState?.openDrawer();
                       }),
-                  CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: currentUser?.photoURL != null
-                        ? ClipOval(
-                            child: Image.network(
-                              currentUser!.photoURL!,
-                              fit: BoxFit.cover,
-                              width: 90.0,
-                              height: 90.0,
-                            ),
-                          )
-                        : Icon(Icons.person,
-                            size: 40.0, color: Colors.grey[800]),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Profile(),
+                        ),
+                      );
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: currentUser?.photoURL != null
+                          ? ClipOval(
+                              child: Image.network(
+                                currentUser!.photoURL!,
+                                fit: BoxFit.cover,
+                                width: 90.0,
+                                height: 90.0,
+                              ),
+                            )
+                          : Icon(Icons.person,
+                              size: 40.0, color: Colors.grey[800]),
+                    ),
                   ),
                 ],
               ),
