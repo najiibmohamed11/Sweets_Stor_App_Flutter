@@ -110,25 +110,27 @@ class _ProfileState extends State<Profile> {
                       GestureDetector(
                         onTap: () {},
                         child: Container(
-                          width: 200,
-                          height: 200,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50)),
-                          child:
-                              currentUser?.photoURL != null && imageFile == null
-                                  ? ClipOval(
-                                      child: Image.network(
-                                        currentUser!.photoURL!,
-                                        fit: BoxFit.cover,
-                                        width: 90.0,
-                                        height: 90.0,
-                                      ),
-                                    )
-                                  : imageFile != null
-                                      ? ClipOval(child: Image.file(imageFile!))
-                                      : Icon(Icons.person,
-                                          size: 40.0, color: Colors.grey[800]),
-                        ),
+                            width: 200,
+                            height: 200,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50)),
+                            child: currentUser?.photoURL != null &&
+                                    imageFile == null
+                                ? ClipOval(
+                                    child: Image.network(
+                                      currentUser!.photoURL!,
+                                      fit: BoxFit.cover,
+                                      width: 90.0,
+                                      height: 90.0,
+                                    ),
+                                  )
+                                : imageFile != null
+                                    ? ClipOval(child: Image.file(imageFile!))
+                                    : CircleAvatar(
+                                        backgroundColor: Colors.grey,
+                                        child: Icon(Icons.person,
+                                            size: 150.0, color: Colors.black),
+                                      )),
                       ),
                       Positioned(
                         bottom: 0,

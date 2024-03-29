@@ -7,6 +7,7 @@ import 'package:sweet_app/auth/firebaseAuth.dart';
 import 'package:sweet_app/pages/Home/Home.dart';
 import 'package:sweet_app/pages/Login/login.dart';
 import 'package:sweet_app/pages/components/athanticationbuttons.dart';
+import 'package:sweet_app/pages/components/googoleauthcontainer.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -211,7 +212,7 @@ class _SignUpState extends State<SignUp> {
                             await _firstore.collection("users").add({
                               "Email": usersdata.user!
                                   .email, // Safe to use ! since we checked for null
-                              "Name": name,
+                              "Name": usersdata.user!.displayName,
                               "Role": "user"
                             });
                             // If sign in and data addition was successful, navigate to the Home page
@@ -303,31 +304,6 @@ class _SignUpState extends State<SignUp> {
 }
 
 ///facebook and google
-
-class authanticationcontainer extends StatelessWidget {
-  authanticationcontainer(
-      {super.key, this.authanticationmethodeimage, this.onTap});
-  String? authanticationmethodeimage;
-  void Function()? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 60.0,
-        height: 60.0,
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 216, 217, 225), // #EBE4F5
-
-          borderRadius: BorderRadius.circular(12.0),
-          border: Border.all(color: Colors.black),
-        ),
-        child: Image.asset(authanticationmethodeimage!),
-      ),
-    );
-  }
-}
 
 //lines
 class sepratorline extends StatelessWidget {

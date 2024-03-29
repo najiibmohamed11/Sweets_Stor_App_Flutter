@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,6 +6,7 @@ import 'package:sweet_app/auth/firebaseAuth.dart';
 import 'package:sweet_app/pages/Home/Home.dart';
 import 'package:sweet_app/pages/SignIn/signIn.dart';
 import 'package:sweet_app/pages/components/athanticationbuttons.dart';
+import 'package:sweet_app/pages/components/googoleauthcontainer.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,6 +18,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   String? email;
   String? password;
+  final _firstore = FirebaseFirestore.instance;
+  FirebaseAuthantication allathantications = FirebaseAuthantication();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -171,6 +176,30 @@ class _LoginState extends State<Login> {
                   children: [
                     authanticationcontainer(
                       authanticationmethodeimage: "images/google.png",
+                      onTap: () async {
+                        UserCredential? usersdata =
+                            await allathantications.signInWithGoogle();
+                        if (usersdata != null && usersdata.user != null) {
+                          try {
+                            await _firstore.collection("users").add({
+                              "Email": usersdata.user!
+                                  .email, // Safe to use ! since we checked for null
+                              "Name": usersdata.user!
+                                  .displayName ,
+                              "Role": "user"
+                            });
+                            // If sign in and data addition was successful, navigate to the Home page
+                            Navigator.pushNamed(context, Home.id);
+                          } catch (e) {
+                            print("Error adding user data to Firestore: $e");
+                            // Handle error adding user data to Firestore
+                          }
+                        } else {
+                          print(
+                              "Google sign-in failed or was cancelled by the user.");
+                          // Handle the case where Google sign-in failed or was cancelled
+                        }
+                      },
                     ),
                     SizedBox(
                       width: 20.0,
@@ -236,27 +265,6 @@ class _LoginState extends State<Login> {
 
 ///facebook and google
 
-class authanticationcontainer extends StatelessWidget {
-  authanticationcontainer({super.key, this.authanticationmethodeimage});
-  String? authanticationmethodeimage;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 60.0,
-      height: 60.0,
-      decoration: BoxDecoration(
-        color: Color.fromARGB(255, 216, 217, 225), // #EBE4F5
-
-        borderRadius: BorderRadius.circular(12.0),
-        border: Border.all(color: Colors.black),
-      ),
-      child: Image.asset(authanticationmethodeimage!),
-    );
-  }
-}
-
-//lines
 class sepratorline extends StatelessWidget {
   const sepratorline({
     super.key,
