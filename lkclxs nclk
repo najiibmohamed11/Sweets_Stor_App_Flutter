@@ -1,0 +1,145 @@
+[33mcommit c1cf7c96310f87c4530c9addb6c1cd690cfdb96c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Fri Mar 29 18:02:19 2024 +0300
+
+    facebook auth
+
+[33mcommit a088ab704ed00ec9ca51d7f5169db515141c29b8[m
+Merge: 2862bc0 52883fe
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Fri Mar 29 09:49:53 2024 +0300
+
+    Merge branch 'master' of https://github.com/najiibmohamed11/Sweets_Stor_App_Flutter
+
+[33mcommit 2862bc0d748d03c2a1bbec109b4261682dd77dfa[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Fri Mar 29 09:48:15 2024 +0300
+
+    sign in for google
+
+[33mcommit 52883fe49223600cc6e8793bb0e8f790fef5161f[m
+Author: abdinajiib mohamed <114617596+najiibmohamed11@users.noreply.github.com>
+Date:   Thu Mar 28 21:17:10 2024 +0300
+
+    Create dart.yml
+
+[33mcommit fcc8a62465a245b02cb9cd7eddac918a1cdd4099[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Thu Mar 28 17:38:41 2024 +0300
+
+    setings profil image functionality,notifications,dark mode,
+
+[33mcommit 079872436716baf0f65e6e5bc176a7571871ef62[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Thu Mar 28 10:50:29 2024 +0300
+
+    profile edit
+
+[33mcommit c112498cc8774e9319db4f1fc55398cc65ef2ee5[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Wed Mar 27 12:13:23 2024 +0300
+
+    aded google authantication
+
+[33mcommit 5ad8a39ce7c6b280836d9505f483acbb23f17539[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Tue Mar 26 22:34:00 2024 +0300
+
+    impliment different roles
+
+[33mcommit 25a6366619665f08995b39a01b21da3be879b134[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Tue Mar 26 18:06:23 2024 +0300
+
+    registration ui
+
+[33mcommit a79193af39d7437820ff1fd62cf4a567a0126960[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Tue Mar 26 11:14:00 2024 +0300
+
+    loging functionalaty
+
+[33mcommit c65733f6e88c646ad7026783c178fc454c485d5a[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Mon Mar 25 23:13:21 2024 +0300
+
+    Loging ui
+
+[33mcommit a2195ca2353c7dd04d315513ae2d04e1eed1694a[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Mon Mar 25 17:40:04 2024 +0300
+
+    welcome screen ui
+
+[33mcommit 497f2310335dc2c00f47917fd5d4828bf88103d5[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Sun Mar 24 21:19:52 2024 +0300
+
+    corecting uncomited changis or errors
+
+[33mcommit 1f3504e57317de2dd2d9d411d36430a963c2cf8a[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Sun Mar 24 10:37:10 2024 +0300
+
+    fully functional favorate
+
+[33mcommit e261343163e51edb5e6f1e22bcf4eb2e242c9722[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Sat Mar 23 22:25:44 2024 +0300
+
+    favorate
+
+[33mcommit f13b4d743bbf0e615b33f84c4a8d11d8e84815b6[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Sat Mar 23 11:27:17 2024 +0300
+
+    totall price
+
+[33mcommit aeb365e5708b53a7aa37f125f2e27b5095c86569[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Fri Mar 22 21:38:42 2024 +0300
+
+    add to cart functionality
+
+[33mcommit ff3800defd3abbedb86184e6968c6f97b75b732f[m
+Merge: 12df971 881d777
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Fri Mar 22 12:10:57 2024 +0300
+
+    Merge branch 'master' of https://github.com/najiibmohamed11/Sweets_Stor_App_Flutter
+
+[33mcommit 12df971d610207078d0709ec8c8a60f3bab4e761[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Fri Mar 22 12:09:14 2024 +0300
+
+    cart model logic
+
+[33mcommit 881d777835f340d2d920eaf5b07a2e627d29dd15[m
+Author: abdinajiib mohamed <114617596+najiibmohamed11@users.noreply.github.com>
+Date:   Tue Mar 19 10:44:37 2024 +0300
+
+    Update README.md
+
+[33mcommit 80e7ba53ba8818c4680a7757a2d0a529be9e5bfa[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Tue Mar 19 10:32:41 2024 +0300
+
+    details page design
+
+[33mcommit aa7c24d9d03dab10f84df6961dff63f020985fa5[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Mon Mar 18 09:38:57 2024 +0300
+
+    upload data to firebase
+
+[33mcommit 8c7bff1c67c8687b0bed1fc6b2831cc019921135[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Sat Mar 16 11:01:31 2024 +0300
+
+    virbase reading
+
+[33mcommit 150270b119a6981e83f1830b8c05b73e60d85076[m
+Author: najiibmohamed11 <xaawomaxamuudkaahiye@gmail.com>
+Date:   Fri Mar 15 16:00:56 2024 +0300
+
+    sweet app ui

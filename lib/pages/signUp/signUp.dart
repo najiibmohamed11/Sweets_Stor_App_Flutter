@@ -233,29 +233,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     authanticationcontainer(
                       authanticationmethodeimage: "images/facebook.png",
-                      onTap: () async {
-                        UserCredential? usersdata =
-                            await allathantications.signInWithFacebook();
-                        if (usersdata != null && usersdata.user != null) {
-                          try {
-                            await _firstore.collection("users").add({
-                              "Email": usersdata.user!
-                                  .email, // Safe to use ! since we checked for null
-                              "Name": usersdata.user!.displayName,
-                              "Role": "user"
-                            });
-                            // If sign in and data addition was successful, navigate to the Home page
-                            Navigator.pushNamed(context, Home.id);
-                          } catch (e) {
-                            print("Error adding user data to Firestore: $e");
-                            // Handle error adding user data to Firestore
-                          }
-                        } else {
-                          print(
-                              "facebook sign-in failed or was cancelled by the user.");
-                          // Handle the case where Google sign-in failed or was cancelled
-                        }
-                      },
+
                     ),
                   ],
                 ),
