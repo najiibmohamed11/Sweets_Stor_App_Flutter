@@ -1,22 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sweet_app/auth/firebaseAuth.dart';
 import 'package:sweet_app/pages/Home/Home.dart';
-import 'package:sweet_app/pages/signUp/signUp.dart';
+import 'package:sweet_app/pages/Login/login.dart';
 import 'package:sweet_app/pages/components/athanticationbuttons.dart';
 import 'package:sweet_app/pages/components/googoleauthcontainer.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   String? email;
+  String? name;
   String? password;
   final _firstore = FirebaseFirestore.instance;
   FirebaseAuthantication allathantications = FirebaseAuthantication();
@@ -56,26 +58,52 @@ class _LoginState extends State<Login> {
                   height: 45.0,
                 ),
                 Text(
-                  'Let\'s sign in',
+                  'Register account',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.notoSerif(
                     fontSize: 35.0,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
+
                 SizedBox(
-                  height: 20.0,
+                  height: 30.0,
                 ),
-                Text(
-                  'welcome back \nyou\'ve been missed!',
-                  textAlign: TextAlign.start,
-                  style: GoogleFonts.montserrat(
-                    letterSpacing: 1.5,
-                    fontSize: 21.0,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Name",
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            name = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: "Enter Your Name",
+                          hintStyle: TextStyle(color: Colors.grey),
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 15.0,
+                            horizontal: 10.0,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
-                  height: 50.0,
+                  height: 20.0,
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -184,8 +212,7 @@ class _LoginState extends State<Login> {
                             await _firstore.collection("users").add({
                               "Email": usersdata.user!
                                   .email, // Safe to use ! since we checked for null
-                              "Name": usersdata.user!
-                                  .displayName ,
+                              "Name": usersdata.user!.displayName,
                               "Role": "user"
                             });
                             // If sign in and data addition was successful, navigate to the Home page
@@ -215,42 +242,55 @@ class _LoginState extends State<Login> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account?"),
+                    Text(" have an account?"),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SignUp()),
+                          MaterialPageRoute(builder: (context) => Login()),
                         );
                       },
                       child: Text(
-                        "Register",
+                        "Sig in",
                         style: TextStyle(fontSize: 15.0, color: Colors.black),
                       ),
                     ),
                   ],
                 ),
                 athenticationbuttons(
-                  name: "Login",
+                  name: "register",
                   color: Colors.black,
                   onTap: () async {
-                    if (email == null || password == null) {
+                    if (email == null || password == null || name == null) {
                       // Show some error message to the user
-                      print("Email and password must be filled.");
+                      print("Email, password, and name must be filled.");
                       return;
                     }
 
-                    User? signedUser = await FirebaseAuthantication()
-                        .signin(email!, password!);
-                    if (signedUser == null) {
+                    User? createUser =
+                        await allathantications.register(email!, password!);
+
+                    if (createUser == null) {
                       // Handle the case where the sign in failed
                       print("Sign in failed.");
                       return;
                     }
-                    print(signedUser);
 
-                    // If sign in was successful, navigate to the Home page
-                    Navigator.pushNamed(context, Home.id);
+                    try {
+                      await createUser.updateDisplayName(name);
+                      await _firstore.collection("users").add({
+                        "Email": createUser.email,
+                        "Name": name,
+                        "Role": "user"
+                        // Store the user ID instead of the whole user object
+                      });
+                      print(createUser);
+                      // If sign in was successful, navigate to the Home page
+                      Navigator.pushNamed(context, Home.id);
+                    } catch (e) {
+                      print("Error updating profile: $e");
+                      // Handle error updating profile
+                    }
                   },
                   textcolor: Colors.white,
                 ),
@@ -265,6 +305,7 @@ class _LoginState extends State<Login> {
 
 ///facebook and google
 
+//lines
 class sepratorline extends StatelessWidget {
   const sepratorline({
     super.key,

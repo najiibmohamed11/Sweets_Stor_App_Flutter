@@ -58,6 +58,7 @@ class cartopration extends ChangeNotifier {
       notifyListeners();
     }
   }
+  
 
   bool favorateStatus(
       String name, String imagepath, int price, String ingridents) {
