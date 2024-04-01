@@ -137,7 +137,7 @@ class _UploadscreenState extends State<Uploadscreen> {
             child: Column(
               children: [
                 GestureDetector(
-                  onTap: () => pickImage(ImageSource.camera),
+                  onTap: () => pickImage(ImageSource.gallery),
                   child: Container(
                     width: 150,
                     height: 150,

@@ -34,7 +34,7 @@ class NavPar extends StatelessWidget {
                 style: TextStyle(color: Colors.black),
               ),
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.green[300],
                 child: currentUser?.photoURL != null
                     ? ClipOval(
                         child: Image.network(
@@ -44,7 +44,10 @@ class NavPar extends StatelessWidget {
                           height: 90.0,
                         ),
                       )
-                    : Icon(Icons.person, size: 40.0, color: Colors.grey[800]),
+                    : Text(
+                        currentUser?.displayName!.substring(0, 1) ?? "G",
+                        style: TextStyle(fontSize: 45.0, color: Colors.white),
+                      ),
               ),
             ),
             ListTile(

@@ -127,9 +127,15 @@ class _ProfileState extends State<Profile> {
                                 : imageFile != null
                                     ? ClipOval(child: Image.file(imageFile!))
                                     : CircleAvatar(
-                                        backgroundColor: Colors.grey,
-                                        child: Icon(Icons.person,
-                                            size: 150.0, color: Colors.black),
+                                        backgroundColor: Colors.green[300],
+                                        child: Text(
+                                          currentUser?.displayName!
+                                                  .substring(0, 1) ??
+                                              "G",
+                                          style: TextStyle(
+                                              fontSize: 45.0,
+                                              color: Colors.white),
+                                        ),
                                       )),
                       ),
                       Positioned(

@@ -206,10 +206,7 @@ class _LoginState extends State<Login> {
                     ),
                     authanticationcontainer(
                       authanticationmethodeimage: "images/facebook.png",
-<<<<<<< HEAD:lib/pages/signUp/signUp.dart
 
-=======
->>>>>>> parent of c1cf7c9 (facebook auth):lib/pages/Login/login.dart
                     ),
                   ],
                 ),

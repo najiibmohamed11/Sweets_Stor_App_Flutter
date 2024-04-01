@@ -91,19 +91,23 @@ class _HomeState extends State<Home> {
                       );
                     },
                     child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: currentUser?.photoURL != null
-                          ? ClipOval(
-                              child: Image.network(
-                                currentUser!.photoURL!,
-                                fit: BoxFit.cover,
-                                width: 90.0,
-                                height: 90.0,
-                              ),
-                            )
-                          : Icon(Icons.person,
-                              size: 40.0, color: Colors.grey[800]),
-                    ),
+                        backgroundColor: Colors.green[300],
+                        child: currentUser?.photoURL != null
+                            ? ClipOval(
+                                child: Image.network(
+                                  currentUser!.photoURL!,
+                                  fit: BoxFit.cover,
+                                  width: 90.0,
+                                  height: 90.0,
+                                ),
+                              )
+                            : Text(
+                                _auth.currentUser?.displayName!
+                                        .substring(0, 1) ??
+                                    "G",
+                                style: TextStyle(
+                                    fontSize: 25.0, color: Colors.white),
+                              )),
                   ),
                 ],
               ),
@@ -214,8 +218,7 @@ class _HomeState extends State<Home> {
                                   },
                                   imagepath: imagepath,
                                   name: name, // Use retrieved name
-                                  description:
-                                      "sugar,flour,butter,\nstrawberry jam,\npink glaze",
+                                  description: components,
                                   price: price,
                                   ontaped: () {
                                     Navigator.push(

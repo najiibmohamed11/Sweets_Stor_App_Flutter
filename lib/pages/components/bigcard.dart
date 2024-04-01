@@ -8,8 +8,7 @@ class sweetcard extends StatelessWidget {
       this.name,
       this.price,
       this.ontaped,
-      this.carttap
-      });
+      this.carttap});
   String? imagepath;
   String? name;
   String? description;
@@ -44,19 +43,23 @@ class sweetcard extends StatelessWidget {
               name!,
               style: TextStyle(
                   letterSpacing: 2.0,
-                  fontSize: 15,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
-            Text(description!),
+            Text(
+              description!,
+              maxLines: 3, // Adjust the number of lines as per your requirement
+              overflow: TextOverflow.ellipsis,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  price!.toString(),
+                  '\$$price',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 GestureDetector(
-                  onTap:carttap,
+                  onTap: carttap,
                   child: CircleAvatar(
                     radius: 25.0,
                     backgroundColor: Colors.white,
