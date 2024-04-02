@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sweet_app/pages/cart/cart%20model/cartmodel.dart';
+import 'package:sweet_app/pages/cart/cart.dart';
 import 'package:sweet_app/pages/cart/components/quantitycontroler.dart';
 
 class Details extends StatefulWidget {
@@ -225,6 +226,7 @@ class _DetailsState extends State<Details> {
                               value.addtocart(widget.name!, widget.imagepath!,
                                   widget.price!,
                                   quantity: howmuch);
+                              Navigator.pushNamed(context, Cart.id);
                             },
                             child: Container(
                               width: double.infinity,

@@ -42,9 +42,9 @@ class _HomeState extends State<Home> {
       key: _scaffoldKey,
       drawer: NavPar(),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.red,
+        backgroundColor: Color(0xFFF9CBDF),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0), // Adjust radius here
+          borderRadius: BorderRadius.circular(40.0), // Adjust radius here
         ),
         onPressed: () {
           Navigator.push(
@@ -54,7 +54,10 @@ class _HomeState extends State<Home> {
             ),
           );
         },
-        child: Icon(Icons.shopping_cart_outlined),
+        child: Icon(
+          Icons.shopping_cart_outlined,
+          color: Colors.black,
+        ),
       ),
       body: SafeArea(
         child: Container(
@@ -63,8 +66,8 @@ class _HomeState extends State<Home> {
               begin: Alignment.topRight,
               end: Alignment.bottomRight,
               colors: [
-                Color(0xFFF9CBDF), // #F9CBDF
-                Color.fromARGB(255, 216, 217, 225), // #EBE4F5
+                Theme.of(context).colorScheme.primary,
+                Theme.of(context).colorScheme.secondary,
               ],
               stops: [0.1, 0.4],
             ),
@@ -77,7 +80,10 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                      icon: Icon(Icons.menu_outlined),
+                      icon: Icon(
+                        Icons.menu_outlined,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
                       onPressed: () {
                         _scaffoldKey.currentState?.openDrawer();
                       }),
@@ -114,7 +120,11 @@ class _HomeState extends State<Home> {
               SizedBox(height: 40.0),
               Text(
                 "HI, ${_auth.currentUser?.displayName!.split(" ").first ?? "user"}👋",
-                style: TextStyle(fontSize: 45.0, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 45.0,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
               ),
               SizedBox(height: 15.0),
               Container(
@@ -122,14 +132,14 @@ class _HomeState extends State<Home> {
                 height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.background,
                 ),
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "Search..",
                     suffixIcon: Icon(
                       Icons.search,
-                      color: Colors.black,
+                      color: Theme.of(context).colorScheme.onSecondary,
                     ),
                     filled: true,
                     fillColor: Colors.transparent,

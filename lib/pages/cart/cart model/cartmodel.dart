@@ -2,8 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:sweet_app/pages/favorate/favorate.dart';
 
 class cartopration extends ChangeNotifier {
+  bool _isdark = false;
   List<Map<String, dynamic>> cartinfo = [];
   List<Map<String, dynamic>> addtofavorate = [];
+
+  bool getisdark() {
+    return _isdark;
+  }
+
+   changetheam(bool isdark) {
+    _isdark = !isdark;
+    ChangeNotifier();
+  }
+
   void addtocart(String name, String imagepath, int price, {int quantity = 1}) {
     bool checkdublicate = false;
     for (var cart in cartinfo) {
@@ -58,7 +69,6 @@ class cartopration extends ChangeNotifier {
       notifyListeners();
     }
   }
-  
 
   bool favorateStatus(
       String name, String imagepath, int price, String ingridents) {

@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:sweet_app/navpar/navpar.dart';
 import 'package:sweet_app/pages/cart/cart%20model/cartmodel.dart';
 import 'package:sweet_app/pages/cart/components/quantitycontroler.dart';
+import 'package:sweet_app/pages/profile/profile.dart';
 
 class Cart extends StatefulWidget {
   const Cart({super.key});
@@ -15,6 +17,7 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final User? currentUser = FirebaseAuth.instance.currentUser;
 
   int howmuch = 1;
 
@@ -56,9 +59,35 @@ class _CartState extends State<Cart> {
                               onPressed: () {
                                 _scaffoldKey.currentState?.openDrawer();
                               }),
-                          CircleAvatar(
-                            child: Icon(Icons.person),
-                          )
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Profile(),
+                                ),
+                              );
+                            },
+                            child: CircleAvatar(
+                                backgroundColor: Colors.green[300],
+                                child: currentUser?.photoURL != null
+                                    ? ClipOval(
+                                        child: Image.network(
+                                          currentUser!.photoURL!,
+                                          fit: BoxFit.cover,
+                                          width: 90.0,
+                                          height: 90.0,
+                                        ),
+                                      )
+                                    : Text(
+                                        currentUser?.displayName!
+                                                .substring(0, 1) ??
+                                            "G",
+                                        style: TextStyle(
+                                            fontSize: 25.0,
+                                            color: Colors.white),
+                                      )),
+                          ),
                         ],
                       ),
                       Padding(
@@ -205,7 +234,7 @@ class _CartState extends State<Cart> {
                               color: Colors.grey[600]),
                         ),
                         Text(
-                          "-0%",
+                          "- 0%",
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 16,
@@ -217,14 +246,7 @@ class _CartState extends State<Cart> {
                     SizedBox(
                       height: 20.0,
                     ),
-                    Text(
-                      "---------------------------------------------------",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          letterSpacing: 0.5,
-                          color: Colors.grey[600]),
-                    ),
+                    DashedLine(),
                     SizedBox(
                       height: 20.0,
                     ),
@@ -262,7 +284,7 @@ class _CartState extends State<Cart> {
                             borderRadius: BorderRadius.circular(15.0)),
                         child: Center(
                             child: Text(
-                          "add to bag",
+                          "checkout",
                           style: TextStyle(fontSize: 20.0, color: Colors.white),
                         )),
                       ),
@@ -274,6 +296,42 @@ class _CartState extends State<Cart> {
           ),
         )),
       ),
+    );
+  }
+}
+
+class DashedLine extends StatelessWidget {
+  final double height;
+  final Color color;
+  final double dashWidth;
+  final double dashSpace;
+
+  const DashedLine({
+    Key? key,
+    this.height = 1,
+    this.color = Colors.grey,
+    this.dashWidth = 10,
+    this.dashSpace = 5,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final dashCount =
+            (constraints.maxWidth / (dashWidth + dashSpace)).floor();
+        return Flex(
+          direction: Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: List<Widget>.generate(dashCount, (_) {
+            return Container(
+              width: dashWidth,
+              height: height,
+              color: color,
+            );
+          }),
+        );
+      },
     );
   }
 }

@@ -22,7 +22,7 @@ class ClickedSweet extends StatelessWidget {
         padding: EdgeInsets.all(10.0),
         width: isSelected ? 150.0 : 50.0,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: Row(

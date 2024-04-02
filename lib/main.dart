@@ -9,6 +9,7 @@ import 'package:sweet_app/pages/cart/cart.dart';
 import 'package:sweet_app/pages/favorate/favorate.dart';
 import 'package:sweet_app/pages/upload/uploadscreen.dart';
 import 'package:sweet_app/pages/welcomescreen/welcome.dart';
+import 'package:sweet_app/themes/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => cartopration())],
       child: MaterialApp(
+        theme: darktheam,
         initialRoute: initialRoute, // Use the determined route
         routes: {
           Uploadscreen.id: (context) => Uploadscreen(),

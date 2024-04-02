@@ -25,7 +25,7 @@ class sweetcard extends StatelessWidget {
         width: 180,
         height: 280.0,
         decoration: BoxDecoration(
-          color: Color(0xFFEBE4F5),
+          color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.circular(30.0),
         ),
         child: Column(
@@ -44,26 +44,32 @@ class sweetcard extends StatelessWidget {
               style: TextStyle(
                   letterSpacing: 2.0,
                   fontSize: 20,
+                  color: Theme.of(context).colorScheme.onSecondary,
                   fontWeight: FontWeight.bold),
             ),
             Text(
               description!,
               maxLines: 3, // Adjust the number of lines as per your requirement
               overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: Colors.grey),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   '\$$price',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
                 ),
                 GestureDetector(
                   onTap: carttap,
                   child: CircleAvatar(
                     radius: 25.0,
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.shopping_cart_outlined),
+                    backgroundColor:Theme.of(context).colorScheme.secondary,
+                    child: Icon(Icons.shopping_cart_outlined,color: Theme.of(context).colorScheme.onPrimary,),
                   ),
                 )
               ],
