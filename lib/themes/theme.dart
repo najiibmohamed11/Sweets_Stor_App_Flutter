@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 final ThemeData lightTheme = ThemeData(
   primaryColor: Color(0xFFEFEEF7),
   colorScheme: ColorScheme.light(
-    primary: Color(0xFFF9CBDF),
-    secondary: Color.fromARGB(255, 216, 217, 225),
-    background: Colors.white,
-    onPrimary: Colors.black, // Text color on top of primary color
-    onSecondary: Colors.black, // Text color on top of secondary color
-  ),
+      primary: Color(0xFFF9CBDF),
+      secondary: Color.fromARGB(255, 216, 217, 225),
+      background: Colors.white,
+      onPrimary: Colors.black, // Text color on top of primary color
+      onSecondary: Colors.black, // Text color on top of secondary color
+      onSurface: Colors.white),
   scaffoldBackgroundColor: Colors.white,
   appBarTheme: AppBarTheme(
     color: Color(0xFFF9CBDF),
@@ -27,14 +27,14 @@ final ThemeData lightTheme = ThemeData(
 final ThemeData darktheam = ThemeData(
   primaryColor: Color(0xFFF9CBDF),
   colorScheme: ColorScheme.light(
-    primary: Colors.black,
-    secondary: Colors.black,
-    background: Color(0xFFF9CBDF),
-    onPrimary: Colors.white, // Text color on top of primary color
-    onSecondary: Colors.black, // Text color on top of secondary color
-  ),
+      primary: Colors.black,
+      secondary: Colors.black,
+      background: Color(0xFFF9CBDF),
+      onPrimary: Colors.white, // Text color on top of primary color
+      onSecondary: Colors.black, // Text color on top of secondary color
+      onSurface: Colors.grey),
 
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: Colors.grey,
   appBarTheme: AppBarTheme(
     color: Color(0xFFF9CBDF),
     iconTheme: IconThemeData(color: Colors.black),

@@ -30,7 +30,7 @@ class _DetailsState extends State<Details> {
   Widget build(BuildContext context) {
     return Consumer<cartopration>(
       builder: (context, value, child) => Scaffold(
-        backgroundColor: Color(0xffF6F6FB),
+        backgroundColor: Theme.of(context).colorScheme.background, // #F9CBDF
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -49,8 +49,8 @@ class _DetailsState extends State<Details> {
                       begin: Alignment.topRight,
                       end: Alignment.bottomRight,
                       colors: [
-                        Color(0xFFF9CBDF), // #F9CBDF
-                        Color.fromARGB(255, 216, 217, 225), // #EBE4F5
+                        Theme.of(context).colorScheme.primary, // #F9CBDF
+                        Theme.of(context).colorScheme.secondary, // #F9CBDF
                       ],
                       stops: [0.1, 0.4],
                     ),
@@ -120,11 +120,16 @@ class _DetailsState extends State<Details> {
                       Text(
                         widget.name!,
                         style: TextStyle(
-                            fontSize: 26.0, fontWeight: FontWeight.bold),
+                            color: Colors.black,
+                            fontSize: 26.0,
+                            fontWeight: FontWeight.bold),
                       ),
                       Text(
                         widget.components!,
-                        style: TextStyle(letterSpacing: 2.0),
+                        style: TextStyle(
+                          letterSpacing: 2.0,
+                          color: Colors.black,
+                        ),
                       ),
                       SizedBox(
                         height: 25.0,
@@ -135,6 +140,7 @@ class _DetailsState extends State<Details> {
                           Text(
                             "⭐ 5.0",
                             style: TextStyle(
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
                             ),
@@ -142,6 +148,7 @@ class _DetailsState extends State<Details> {
                           Text(
                             "🔥 ${widget.caleri} cal",
                             style: TextStyle(
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
                             ),
@@ -149,7 +156,9 @@ class _DetailsState extends State<Details> {
                           Text(
                             "⏰ 5-10minuts",
                             style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.bold),
+                                color: Colors.black,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -161,7 +170,9 @@ class _DetailsState extends State<Details> {
                         child: Text(
                           widget.description!,
                           style: TextStyle(
-                              fontSize: 18.0, fontWeight: FontWeight.w500),
+                              color: Colors.black,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
                       SizedBox(
@@ -173,6 +184,7 @@ class _DetailsState extends State<Details> {
                           Text(
                             "\$ ${widget.price}",
                             style: TextStyle(
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 25.0,
                             ),
@@ -195,6 +207,7 @@ class _DetailsState extends State<Details> {
                           Text(
                             howmuch.toString(),
                             style: TextStyle(
+                              color: Colors.grey,
                               fontWeight: FontWeight.bold,
                               fontSize: 20.0,
                             ),

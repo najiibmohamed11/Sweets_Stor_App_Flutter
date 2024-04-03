@@ -121,7 +121,7 @@ class _HomeState extends State<Home> {
               Text(
                 "HI, ${_auth.currentUser?.displayName!.split(" ").first ?? "user"}👋",
                 style: TextStyle(
-                  fontSize: 45.0,
+                  fontSize: 35.0,
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
