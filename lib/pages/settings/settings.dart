@@ -17,7 +17,7 @@ class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
+      backgroundColor: Theme.of(context).drawerTheme.backgroundColor,
       appBar: AppBar(
         backgroundColor: Color(0xFFF9CBDF), // #F9CBDF
 
@@ -37,7 +37,7 @@ class _SettingState extends State<Setting> {
                 decoration: InputDecoration(
                   hintText: 'search',
                   filled: true,
-                  fillColor: Color(0xffF1F1F1),
+                  fillColor: Theme.of(context).colorScheme.background,
                   border: InputBorder.none,
                 ),
               ),
@@ -56,6 +56,7 @@ class _SettingState extends State<Setting> {
                 leading: Icon(
                   Icons.person_outline_sharp,
                   size: 30.0,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 title: Text(
                   "account",
@@ -66,7 +67,9 @@ class _SettingState extends State<Setting> {
                 ),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
-              Divider(),
+              Divider(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
               ListTile(
                 onTap: () {
                   Navigator.push(
@@ -78,6 +81,7 @@ class _SettingState extends State<Setting> {
                 leading: Icon(
                   Icons.notifications_none,
                   size: 30.0,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 title: Text(
                   "notifications",
@@ -88,7 +92,9 @@ class _SettingState extends State<Setting> {
                 ),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
-              Divider(),
+              Divider(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
               ListTile(
                 onTap: () {
                   Navigator.push(
@@ -100,6 +106,7 @@ class _SettingState extends State<Setting> {
                 leading: Icon(
                   Icons.remove_red_eye_outlined,
                   size: 30.0,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 title: Text(
                   "appearance",
@@ -110,11 +117,14 @@ class _SettingState extends State<Setting> {
                 ),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
-              Divider(),
+              Divider(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
               ListTile(
                 leading: Icon(
                   Icons.lock_outline_rounded,
                   size: 30.0,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 title: Text(
                   "privacy & security",
@@ -125,11 +135,14 @@ class _SettingState extends State<Setting> {
                 ),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
-              Divider(),
+              Divider(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
               ListTile(
                 leading: Icon(
                   Icons.support_agent,
                   size: 30.0,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 title: Text(
                   "help & support",
@@ -140,11 +153,14 @@ class _SettingState extends State<Setting> {
                 ),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
-              Divider(),
+              Divider(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
               ListTile(
                 leading: Icon(
                   Icons.contact_support_outlined,
                   size: 30.0,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 title: Text(
                   "about",
@@ -155,7 +171,9 @@ class _SettingState extends State<Setting> {
                 ),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
-              Divider(),
+              Divider(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
               ListTile(
                 onTap: () {
                   FirebaseAuthantication().signOut();
@@ -174,7 +192,9 @@ class _SettingState extends State<Setting> {
                       color: Colors.red),
                 ),
               ),
-              Divider(),
+              Divider(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
             ],
           ),
         ),

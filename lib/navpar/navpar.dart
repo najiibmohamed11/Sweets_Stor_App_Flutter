@@ -18,6 +18,7 @@ class NavPar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Drawer(
+        backgroundColor: Theme.of(context).drawerTheme.backgroundColor,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -51,24 +52,48 @@ class NavPar extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home_filled),
-              title: Text("Home"),
+              leading: Icon(
+                Icons.home_filled,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+              title: Text(
+                "Home",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
               onTap: () {
                 Navigator.pushNamed(context, Home.id);
               },
             ),
             SizedBox(height: 20.0),
             ListTile(
-              leading: Icon(Icons.favorite_sharp),
-              title: Text("favorate"),
+              leading: Icon(
+                Icons.favorite_sharp,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+              title: Text(
+                "favorate",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
               onTap: () {
                 Navigator.pushNamed(context, Favorate.id);
               },
             ),
             SizedBox(height: 20.0),
             ListTile(
-              leading: Icon(Icons.shopping_cart_outlined),
-              title: Text("cart"),
+              leading: Icon(
+                Icons.shopping_cart_outlined,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+              title: Text(
+                "cart",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
               onTap: () {
                 Navigator.pushNamed(context, Cart.id);
               },
@@ -81,8 +106,16 @@ class NavPar extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasData && snapshot.data == "admin") {
                     return ListTile(
-                      leading: Icon(Icons.upload_file_outlined),
-                      title: Text("add new product"),
+                      leading: Icon(
+                        Icons.upload_file_outlined,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      title: Text(
+                        "add new product",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
                       onTap: () {
                         Navigator.pushNamed(context, Uploadscreen.id);
                       },
@@ -99,8 +132,16 @@ class NavPar extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text("settings"),
+              leading: Icon(
+                Icons.settings,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+              title: Text(
+                "settings",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
               onTap: () {
                 Navigator.push(
                   context,
@@ -110,10 +151,20 @@ class NavPar extends StatelessWidget {
                 );
               },
             ),
-            Divider(),
+            Divider(
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
             ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text("Exit"),
+              leading: Icon(
+                Icons.exit_to_app,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+              title: Text(
+                "Exit",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
               onTap: () async {
                 FirebaseAuthantication().signOut();
                 Navigator.of(context).pushReplacementNamed(WelcomeScreen.id);

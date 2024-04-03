@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:sweet_app/pages/favorate/favorate.dart';
+import 'package:sweet_app/themes/theme.dart';
 
 class cartopration extends ChangeNotifier {
   bool _isdark = false;
   List<Map<String, dynamic>> cartinfo = [];
   List<Map<String, dynamic>> addtofavorate = [];
+  ThemeData themeData = lightTheme;
 
   bool getisdark() {
     return _isdark;
   }
 
-   changetheam(bool isdark) {
-    _isdark = !isdark;
-    ChangeNotifier();
-  }
+void changetheme(bool isdark) {
+  _isdark = isdark;
+  themeData = isdark ? darktheam : lightTheme; // Corrected typo and simplified logic
+  notifyListeners();
+}
 
   void addtocart(String name, String imagepath, int price, {int quantity = 1}) {
     bool checkdublicate = false;

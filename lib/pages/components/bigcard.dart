@@ -25,7 +25,7 @@ class sweetcard extends StatelessWidget {
         width: 180,
         height: 280.0,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(30.0),
         ),
         child: Column(
@@ -68,8 +68,11 @@ class sweetcard extends StatelessWidget {
                   onTap: carttap,
                   child: CircleAvatar(
                     radius: 25.0,
-                    backgroundColor:Theme.of(context).colorScheme.secondary,
-                    child: Icon(Icons.shopping_cart_outlined,color: Theme.of(context).colorScheme.onPrimary,),
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    child: Icon(
+                      Icons.shopping_cart_outlined,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
                   ),
                 )
               ],

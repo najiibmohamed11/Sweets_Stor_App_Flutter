@@ -32,17 +32,23 @@ class MyApp extends StatelessWidget {
         currentUser == null ? WelcomeScreen.id : Home.id;
 
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => cartopration())],
-      child: MaterialApp(
-        theme: darktheam,
-        initialRoute: initialRoute, // Use the determined route
-        routes: {
-          Uploadscreen.id: (context) => Uploadscreen(),
-          Home.id: (context) => Home(),
-          Cart.id: (context) => Cart(),
-          Favorate.id: (context) => Favorate(),
-          WelcomeScreen.id: (context) => WelcomeScreen(),
-          // You might need to add a route for signing out that leads to the WelcomeScreen
+      providers: [
+        ChangeNotifierProvider(create: (context) => cartopration()),
+      ],
+      child: Consumer<cartopration>(
+        // Use Consumer to listen to theme changes
+        builder: (context, cartOperation, child) {
+          return MaterialApp(
+            theme: cartOperation.themeData, // Apply theme from cartOperation
+            initialRoute: initialRoute,
+            routes: {
+              Uploadscreen.id: (context) => Uploadscreen(),
+              Home.id: (context) => Home(),
+              Cart.id: (context) => Cart(),
+              Favorate.id: (context) => Favorate(),
+              WelcomeScreen.id: (context) => WelcomeScreen(),
+            },
+          );
         },
       ),
     );
