@@ -84,7 +84,7 @@ class _FavorateState extends State<Favorate> {
                                 itemBuilder: (context, index) {
                                   return value.addtofavorate.length == 0
                                       ? Text("no favorate data")
-                                      : sweetcard(
+                                      : SweetCard(
                                           name: value.addtofavorate[index]
                                               ["name"],
                                           // carttap: () => value.addtocart(name, imagepath, price),

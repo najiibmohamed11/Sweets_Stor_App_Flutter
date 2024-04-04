@@ -210,6 +210,7 @@ class _HomeState extends State<Home> {
                           // If we reach here, we have data
                           List<Widget> sweetCards = [];
                           for (var cardData in snapshot.data!.docs.reversed) {
+                            String documentId = cardData.id;
                             // Assuming "name" is the correct field name in Firestore
                             String name = cardData[
                                 "name"]; // Adjust field name if necessary
@@ -222,7 +223,9 @@ class _HomeState extends State<Home> {
                             String components = cardData["components"];
                             // Add a new sweetcard widget to the list
                             sweetCards.add(
-                              sweetcard(
+                              SweetCard(
+                                collection:selectedSweet,
+                                  id: documentId,
                                   carttap: () {
                                     value.addtocart(name, imagepath, price);
                                   },
