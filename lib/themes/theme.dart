@@ -8,7 +8,7 @@ final ThemeData lightTheme = ThemeData(
       background: Colors.white,
       onPrimary: Colors.black, // Text color on top of primary color
       onSecondary: Colors.black, // Text color on top of secondary color
-      onSurface: Colors.white),
+      onSurface: Color(0xffF1F1F1)),
   scaffoldBackgroundColor: Colors.white,
   appBarTheme: AppBarTheme(
     color: Color(0xFFF9CBDF),
@@ -32,7 +32,7 @@ final ThemeData darktheam = ThemeData(
       background: Color(0xFFF9CBDF),
       onPrimary: Colors.white, // Text color on top of primary color
       onSecondary: Colors.black, // Text color on top of secondary color
-      onSurface: Colors.grey),
+      onSurface: Color(0xFFF9CBDF)),
 
   scaffoldBackgroundColor: Colors.grey,
   appBarTheme: AppBarTheme(

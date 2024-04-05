@@ -66,7 +66,12 @@ class _DetailsState extends State<Details> {
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    icon: Icon(Icons.arrow_back_ios)),
+                                    icon: Icon(
+                                      Icons.arrow_back_ios,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
+                                    )),
                                 Spacer(),
                                 value.favorateStatus(
                                         widget.name!,
@@ -97,7 +102,12 @@ class _DetailsState extends State<Details> {
                                                 widget.components!);
                                           });
                                         },
-                                        icon: Icon(Icons.favorite_border))
+                                        icon: Icon(
+                                          Icons.favorite_border,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary, // #F9CBDF
+                                        ))
                               ],
                             ),
                             Container(

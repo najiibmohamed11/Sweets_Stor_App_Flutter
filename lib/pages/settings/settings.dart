@@ -37,7 +37,7 @@ class _SettingState extends State<Setting> {
                 decoration: InputDecoration(
                   hintText: 'search',
                   filled: true,
-                  fillColor: Theme.of(context).colorScheme.background,
+                  fillColor: Theme.of(context).colorScheme.onSurface,
                   border: InputBorder.none,
                 ),
               ),

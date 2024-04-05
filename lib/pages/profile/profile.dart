@@ -80,8 +80,8 @@ class _ProfileState extends State<Profile> {
             begin: Alignment.topRight,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFFF9CBDF), // #F9CBDF
-              Color.fromARGB(255, 216, 217, 225), // #EBE4F5
+              Theme.of(context).colorScheme.primary,
+              Theme.of(context).colorScheme.secondary,
             ],
             stops: [0.1, 0.4],
           ),
@@ -99,7 +99,10 @@ class _ProfileState extends State<Profile> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.arrow_back_ios),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
                 SizedBox(
                   height: 100.0,
@@ -147,7 +150,7 @@ class _ProfileState extends State<Profile> {
                           },
                           icon: Icon(
                             Icons.add_a_photo,
-                            color: Colors.black,
+                            color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         ),
                       ),
@@ -185,7 +188,16 @@ class _ProfileState extends State<Profile> {
                         vertical: 15.0,
                         horizontal: 10.0,
                       ),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Theme.of(context).colorScheme.onPrimary),
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        // This line is added
+                        borderSide: BorderSide(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            width: 2.0), // Change width for emphasis
                         borderRadius: BorderRadius.circular(30.0),
                       ),
                     ),
@@ -207,15 +219,21 @@ class _ProfileState extends State<Profile> {
 
                       // Button action
                     },
-                    child: Text("EDIT"),
+                    child: Text(
+                      "EDIT",
+                      style: TextStyle(color: Colors.grey),
+                    ),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                          Colors.black), // Background color
+                          Theme.of(context)
+                              .colorScheme
+                              .onPrimary), // Background color
                       foregroundColor:
                           MaterialStateProperty.all(Colors.white), // Text color
 
-                      textStyle: MaterialStateProperty.all(
-                          TextStyle(fontSize: 16)), // Text style
+                      textStyle: MaterialStateProperty.all(TextStyle(
+                        fontSize: 16,
+                      )), // Text style
                     ),
                   ),
                 ))
