@@ -98,8 +98,8 @@ class _SweetCardState extends State<SweetCard> {
       onTap: widget.ontaped,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        width: 180,
-        height: 280.0,
+        // width: 160,
+        // height: 280.0,
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(30.0),

@@ -79,8 +79,11 @@ class _FavorateState extends State<Favorate> {
                                 itemCount: value.addtofavorate.length,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
-                                        childAspectRatio: 1 / 1.5,
-                                        crossAxisCount: 2),
+                                  childAspectRatio: 1 / 1.5,
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing:
+                                      10, // Add space between columns
+                                ),
                                 itemBuilder: (context, index) {
                                   return value.addtofavorate.length == 0
                                       ? Text("no favorate data")
