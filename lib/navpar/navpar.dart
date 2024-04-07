@@ -53,7 +53,7 @@ class NavPar extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(
-                Icons.home_filled,
+                Icons.home_outlined,
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
               title: Text(
@@ -69,7 +69,7 @@ class NavPar extends StatelessWidget {
             SizedBox(height: 20.0),
             ListTile(
               leading: Icon(
-                Icons.favorite_sharp,
+                Icons.favorite_border_outlined,
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
               title: Text(
@@ -133,7 +133,7 @@ class NavPar extends StatelessWidget {
             SizedBox(height: 20.0),
             ListTile(
               leading: Icon(
-                Icons.settings,
+                Icons.settings_outlined,
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
               title: Text(
