@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
         // Use Consumer to listen to theme changes
         builder: (context, cartOperation, child) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             theme: cartOperation.themeData, // Apply theme from cartOperation
             initialRoute: initialRoute,
             routes: {
